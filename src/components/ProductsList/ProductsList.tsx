@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../app/hooks';
 import { Product } from '../../types/Product';
@@ -10,13 +10,11 @@ enum SortOrder {
   AGE = 'age',
 }
 
-export const ProductsList = () => {
+export const ProductsList = memo(() => {
   const products = useAppSelector((state) => state.products.items);
   const [hasModal, setHasModal] = useState(false);
   const [sortOrder, setSortOrder] = useState<string>(SortOrder.ALPH);
   const visileProducts: Product[] = [...products];
-
-  // console.log(products);
 
   switch (sortOrder) {
     case SortOrder.ALPH:
@@ -72,4 +70,4 @@ export const ProductsList = () => {
       ))}
     </div>
   );
-};
+});

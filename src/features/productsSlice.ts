@@ -48,6 +48,7 @@ export const productsSlice = createSlice({
     });
     builder.addCase(init.rejected, (state) => {
       state.error = 'Unable to load data';
+        state.loading = false;
     });
   },
 });

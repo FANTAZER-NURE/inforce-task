@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useAppDispatch } from '../../app/hooks';
 import * as productsActions from '../../features/productsSlice';
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { Product } from '../../types/Product';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
   product?: Product;
 };
 
-export const Modal: React.FC<Props> = ({ hasModal, setHasModal, product }) => {
+export const Modal: React.FC<Props> = memo(({ hasModal, setHasModal, product }) => {
   const dispatch = useAppDispatch();
   const [name, setName] = useState('');
   const [price, setPrice] = useState<number>();
@@ -333,4 +333,4 @@ export const Modal: React.FC<Props> = ({ hasModal, setHasModal, product }) => {
       </div>
     </div>
   );
-};
+});

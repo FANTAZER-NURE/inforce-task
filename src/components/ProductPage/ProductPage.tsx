@@ -26,8 +26,6 @@ export const ProductPage = () => {
     });
   }, []);
 
-  console.log(serverComments);
-
   return (
     <div className="section block">
       {isLoading ? (

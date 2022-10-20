@@ -1,27 +1,30 @@
-import { useEffect, useMemo, useState } from 'react';
-import { getComments } from '../../api/getComments';
-import {  useAppSelector } from '../../app/hooks';
+import { memo, useState } from 'react';
+import { useAppSelector } from '../../app/hooks';
 import { Comment } from '../../types/Comment';
 import { CommentItem } from '../CommentItem/CommentItem';
 import { CommentModal } from '../CommentModal/CommentModal';
-import { Loader } from '../Loader/Loader';
 
 type Props = {
-  setIsCommentsOpen: (value: boolean) => void,
-  comments: Comment[],
-  id: number,
+  setIsCommentsOpen: (value: boolean) => void;
+  comments: Comment[];
+  id: number;
 };
 
-export const CommentsList: React.FC<Props> = ({ comments, setIsCommentsOpen, id }) => {
-  const [visibleComments, setVisibleComments] = useState<Comment[]>(comments);
-  const [hasModal, setHasModal] = useState(false);
-  let reduxComments = useAppSelector((state) => state.comments.items);
+export const CommentsList: React.FC<Props> = memo(
+  ({
+      comments,
+      setIsCommentsOpen,
+      id
+  }) => {
+    const [visibleComments, setVisibleComments] = useState<Comment[]>(comments);
+    const [hasModal, setHasModal] = useState(false);
+    let reduxComments = useAppSelector((state) => state.comments.items);
 
-  reduxComments = reduxComments.filter((comment) => comment.postId === id);
+    reduxComments = reduxComments.filter((comment) => comment.postId === id);
 
-  return (
-    <div className="column has-text-centered">
+    return (
       <div className="column has-text-centered">
+        <div className="column has-text-centered">
           <button
             className="button is-link mb-3 mr-5"
             onClick={() => {
@@ -50,9 +53,10 @@ export const CommentsList: React.FC<Props> = ({ comments, setIsCommentsOpen, id 
           ))}
         </div>
 
-      {hasModal && (
-        <CommentModal hasModal={hasModal} setHasModal={setHasModal} id={id} />
-      )}
-    </div>
-  );
-};
+        {hasModal && (
+          <CommentModal hasModal={hasModal} setHasModal={setHasModal} id={id} />
+        )}
+      </div>
+    );
+  }
+);

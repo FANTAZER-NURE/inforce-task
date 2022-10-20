@@ -1,9 +1,7 @@
-// import { client } from "../utils/fetchClient";
-
 /*
   * There are no products API on JSON server,
   * so I decided to use API that I used before,
-  * which has almost similar structure
+  * which has almost similar structure and provides products
 */
 
 const BASE_URL =

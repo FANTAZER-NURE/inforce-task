@@ -1,5 +1,3 @@
-// import { Comment } from "./Comment";
-
 export interface Product {
   age: number;
   id: string;
