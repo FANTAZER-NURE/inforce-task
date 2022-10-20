@@ -1,58 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
-import './App.css';
+import { useEffect } from 'react';
+import { useAppDispatch } from './app/hooks';
+import { init } from './features/productsSlice';
+import { useAppSelector } from './app/hooks';
+import './index.css';
+import { Loader } from './components/Loader/Loader';
+import { Link } from 'react-router-dom';
 
-function App() {
+export const App = () => {
+  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector((state) => state.products.loading);
+
+  useEffect(() => {
+    console.log(1);
+    dispatch(init());
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <span>
-          <span>Learn </span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
+    <div className="block section">
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className="block has-text-centered">
+          <h1 className="title is-size-1">Welcome to my test task!</h1>
+
+          <Link to="./products" className="mb-5 is-size-2">
+            Here's the link to the products!
+          </Link>
+          <p className="has-text-danger mt-5">
+            If you go back to this page, you will reset all the products by
+            reloading them
+          </p>
+        </div>
+      )}
     </div>
   );
-}
-
-export default App;
+};
