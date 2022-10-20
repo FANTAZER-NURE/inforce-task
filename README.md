@@ -6,7 +6,7 @@
   * React Router
   * Bulma
 
-[DEMO]("https://FANTAZER-NURE.github.io/inforce-task")
+[DEMO]('https://FANTAZER-NURE.github.io/inforce-task')
 
 
   *There are no products API on JSON server,*
